@@ -15,7 +15,7 @@ jobs:
         uses: dabao1955/kernel_build_action@main
         with:
           kernel-url: https://github.com/A-Australian/A047F-Kernel-Next
-          kernel-branch: taffy
+          kernel-branch: main
           config: exynos850-a04sxx_defconfig
           arch: arm64
           aosp-gcc: true
