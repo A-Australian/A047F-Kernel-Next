@@ -1,2 +1,40 @@
-- name: Android Kernel Action
-  uses: lemniskett/android-kernel-actions@v1.0.1
+name: CI
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-kernel:
+    name: Build Kernel
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Build
+        uses: dabao1955/kernel_build_action@main
+        with:
+          kernel-url: https://github.com/A-Australian/A047F-Kernel-Next
+          kernel-branch: taffy
+          config: exynos850-a04sxx_defconfig
+          arch: arm64
+          aosp-gcc: true
+          aosp-clang: true
+          android-version: 12
+          aosp-clang-version: r450784d
+          
+          # KernelSU Next Integration
+          ksu: true
+          ksu-other: true
+          ksu-url: https://github.com/KernelSU-Next/KernelSU-Next
+          
+          # Kali NetHunter Integration
+          nethunter: true
+          nethunter-patch: true
+          
+          # Output Formatting
+          anykernel3: false
+          #bootimg-url: https://replace-this-with-a-direct-link.com/boot.img # REQUIRED
+          
+          release: false
+          access-token: ${{ secrets.GITHUB_TOKEN }}
